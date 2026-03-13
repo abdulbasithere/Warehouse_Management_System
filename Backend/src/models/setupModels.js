@@ -17,6 +17,8 @@ const UnitsOfMeasure = require('./UnitsOfMeasure');
 const Supplier = require('./Supplier');
 const PurchaseOrder = require('./PurchaseOrder');
 const PurchaseOrderLineItem = require('./PurchaseOrderLineItem');
+const ProductBarcode = require('./ProductBarcode');
+
 
 const models = {
     User,
@@ -35,8 +37,10 @@ const models = {
     ShelfLocation,
     InventoryLocation,
     OrderAllocation,
-    InventoryAdjustment
+    InventoryAdjustment,
+    ProductBarcode
 };
+
 
 // Run associations
 Object.values(models).forEach(model => {

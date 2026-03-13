@@ -63,6 +63,7 @@ ProductVariant.associate = (models) => {
     ProductVariant.hasMany(models.InventoryLocation, { foreignKey: 'VariantID' });
     ProductVariant.hasMany(models.UnitsOfMeasure, { foreignKey: 'VariantID' });
     ProductVariant.hasMany(models.PurchaseOrderLineItem, { foreignKey: 'VariantID' });
+    ProductVariant.hasMany(models.ProductBarcode, { foreignKey: 'VariantID' });
     // → later: OrderItem, Putaway, etc. can point here instead of old ProductId
 };
 
