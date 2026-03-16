@@ -3,9 +3,8 @@ const sequelize = require('../utils/db');
 
 const ProductVariant = sequelize.define('ProductVariant', {
     VariantID: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(50),
         primaryKey: true,
-        autoIncrement: true,
         allowNull: false
     },
     ProductID: {

@@ -3,9 +3,8 @@ const sequelize = require('../utils/db');
 
 const PurchaseOrder = sequelize.define('PurchaseOrder', {
     PurchaseOrderID: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(100),
         primaryKey: true,
-        autoIncrement: true,
         allowNull: false
     },
     SupplierID: {

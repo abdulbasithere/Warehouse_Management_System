@@ -9,18 +9,18 @@ const PurchaseOrderLineItem = sequelize.define('PurchaseOrderLineItem', {
         allowNull: false
     },
     PurchaseOrderID: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(100),
         allowNull: false
     },
     VariantID: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(50),
         allowNull: false
     },
-    Quantity: {                     // ← Ordered quantity (renamed for clarity if desired)
+    Quantity: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false
     },
-    QuantityReceived: {             // ← Cumulative quantity actually received
+    QuantityReceived: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
         defaultValue: 0.0
