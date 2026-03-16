@@ -10,7 +10,7 @@ module.exports = {
                 allowNull: false
             },
             purchaseOrderId: {
-                type: Sequelize.INTEGER,
+                type: Sequelize.STRING(100),
                 allowNull: false
             },
             variantId: {

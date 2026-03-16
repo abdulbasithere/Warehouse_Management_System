@@ -9,7 +9,7 @@ const UnitsOfMeasure = sequelize.define('UnitsOfMeasure', {
         allowNull: false
     },
     VariantID: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(50),
         allowNull: false
     },
     UnitName: {

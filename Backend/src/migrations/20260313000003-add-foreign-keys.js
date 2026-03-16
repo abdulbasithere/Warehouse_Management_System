@@ -140,6 +140,18 @@ module.exports = {
             onUpdate: 'CASCADE'
         });
 
+        // InventoryLocations → ProductVariants
+        await queryInterface.addConstraint('InventoryLocations', {
+            fields: ['variantId'],
+            type: 'foreign key',
+            name: 'fk_inventory_variant',
+            references: {
+                table: 'ProductVariants',
+                field: 'variantId'
+            },
+            onUpdate: 'CASCADE'
+        });
+
         // InventoryLocations → ShelfLocations
         await queryInterface.addConstraint('InventoryLocations', {
             fields: ['shelfId'],
@@ -319,6 +331,7 @@ module.exports = {
         await queryInterface.removeConstraint('InventoryLocations', 'fk_inventory_putaway');
         await queryInterface.removeConstraint('OrderAllocations', 'fk_orderallocations_picklist');
         await queryInterface.removeConstraint('InventoryLocations', 'fk_inventory_shelf');
+        await queryInterface.removeConstraint('InventoryLocations', 'fk_inventory_variant');
         await queryInterface.removeConstraint('InventoryLocations', 'fk_inventory_product');
         await queryInterface.removeConstraint('Putaway', 'fk_putaway_user');
         await queryInterface.removeConstraint('Putaway', 'fk_putaway_product');

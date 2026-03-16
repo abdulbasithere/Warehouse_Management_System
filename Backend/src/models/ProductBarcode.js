@@ -3,7 +3,7 @@ const sequelize = require('../utils/db');
 
 const ProductBarcode = sequelize.define('ProductBarcode', {
     VariantID: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(50),
         allowNull: false
     },
     Barcode: {

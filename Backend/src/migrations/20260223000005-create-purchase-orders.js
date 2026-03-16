@@ -4,9 +4,8 @@ module.exports = {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable('PurchaseOrders', {
             purchaseOrderId: {
-                type: Sequelize.INTEGER,
+                type: Sequelize.STRING(100),
                 primaryKey: true,
-                autoIncrement: true,
                 allowNull: false
             },
             number: {
