@@ -19,8 +19,10 @@ import { ShelfLocationsPage } from './pages/ShelfLocationsPage';
 import { ReturnsPage } from './pages/ReturnsPage';
 import { UserManagementPage } from './pages/UserManagementPage';
 import { InventoryAdjustmentPage } from './pages/InventoryAdjustmentPage';
+import ProductMapping from './pages/ProductMapping';
 import {PurchaseOrderPage} from './pages/PurchaseOrderPage';
 import PurchaseOrderDetailPage from './pages/PurchaseOrderDetailPage';
+import GetInPage from './pages/GetInPage';
 
 const RoleGuard: React.FC<{ children: React.ReactNode; allowedRoles: string[] }> = ({ children, allowedRoles }) => {
   const { user } = useAppSelector(state => state.auth);
@@ -89,9 +91,11 @@ const App: React.FC = () => {
           <Route path="returns" element={<RoleGuard allowedRoles={['MASTER']}><ReturnsPage /></RoleGuard>} />
           <Route path="Purchase-Order" element={<RoleGuard allowedRoles={['MASTER']}><PurchaseOrderPage /></RoleGuard>} />
           <Route path="Purchase-Order/:poNumber" element={<RoleGuard allowedRoles={['MASTER']}><PurchaseOrderDetailPage /></RoleGuard>} />
+          <Route path="Product-mapping" element={<RoleGuard allowedRoles={['MASTER']}><ProductMapping /></RoleGuard>} />
           <Route path="inventory-adjustment" element={<RoleGuard allowedRoles={['MASTER']}><InventoryAdjustmentPage /></RoleGuard>} />
+          <Route path="GetIn" element={<RoleGuard allowedRoles={['MASTER']}><GetInPage /></RoleGuard>} />
           <Route path="users" element={<RoleGuard allowedRoles={['MASTER']}><UserManagementPage /></RoleGuard>} />
-
+          
           {/* Picking & Putaway */}
           <Route path="picking" element={<RoleGuard allowedRoles={['MASTER', 'PICKER']}><PickingOverviewPage /></RoleGuard>} />
           <Route path="picking/:pickListId" element={<RoleGuard allowedRoles={['MASTER', 'PICKER']}><PickingDetailPage /></RoleGuard>} />
