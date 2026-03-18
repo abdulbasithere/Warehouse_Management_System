@@ -5,8 +5,6 @@ module.exports = {
         await queryInterface.createTable('ProductVariants', {
             variantId: {
                 type: Sequelize.INTEGER,
-                primaryKey: true,
-                autoIncrement: true,
                 allowNull: false
             },
             productId: {
