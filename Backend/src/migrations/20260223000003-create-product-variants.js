@@ -13,11 +13,6 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
-            sku: {
-                type: Sequelize.STRING(50),
-                allowNull: false,
-                unique: true
-            },
             color: {
                 type: Sequelize.STRING(50),
                 allowNull: true

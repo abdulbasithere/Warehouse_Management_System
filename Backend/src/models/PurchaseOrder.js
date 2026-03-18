@@ -8,7 +8,7 @@ const PurchaseOrder = sequelize.define('PurchaseOrder', {
         allowNull: false
     },
     SupplierID: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(50),
         allowNull: false
     },
     Status: {

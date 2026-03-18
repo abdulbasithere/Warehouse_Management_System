@@ -8,13 +8,8 @@ module.exports = {
                 primaryKey: true,
                 allowNull: false
             },
-            number: {
-                type: Sequelize.STRING(50),
-                allowNull: false,
-                unique: true
-            },
             supplierId: {
-                type: Sequelize.INTEGER,
+                type: Sequelize.STRING(50),
                 allowNull: false
             },
             status: {

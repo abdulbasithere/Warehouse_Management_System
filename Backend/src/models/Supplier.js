@@ -3,9 +3,8 @@ const sequelize = require('../utils/db');
 
 const Supplier = sequelize.define('Supplier', {
     SupplierID: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING(50),
         primaryKey: true,
-        autoIncrement: true,
         allowNull: false
     },
     Name: {

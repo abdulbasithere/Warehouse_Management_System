@@ -11,11 +11,6 @@ const ProductVariant = sequelize.define('ProductVariant', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    SKU: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
-        unique: true
-    },
     Color: {
         type: DataTypes.STRING(50),
         allowNull: true
