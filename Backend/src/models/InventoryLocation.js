@@ -12,7 +12,7 @@ const InventoryLocation = sequelize.define('InventoryLocation', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    VariantID: {
+    VariantId: {
         type: DataTypes.STRING(50),
         allowNull: false
     },

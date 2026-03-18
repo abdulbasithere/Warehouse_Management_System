@@ -10,11 +10,6 @@ const ProductBarcode = sequelize.define('ProductBarcode', {
         type: DataTypes.STRING(80),
         allowNull: false
     },
-    IsPrimary: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false
-    },
     IsActive: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
