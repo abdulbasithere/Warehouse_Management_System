@@ -18,6 +18,9 @@ const Supplier = require('./Supplier');
 const PurchaseOrder = require('./PurchaseOrder');
 const PurchaseOrderLineItem = require('./PurchaseOrderLineItem');
 const ProductBarcode = require('./ProductBarcode');
+const InboundShipment = require('./InboundShipment');
+const InboundShipmentItem = require('./InboundShipmentItem');
+const InboundShipmentAttachment = require('./InboundShipmentAttachment');
 
 
 const models = {
@@ -38,7 +41,10 @@ const models = {
     InventoryLocation,
     OrderAllocation,
     InventoryAdjustment,
-    ProductBarcode
+    ProductBarcode,
+    InboundShipment,
+    InboundShipmentItem,
+    InboundShipmentAttachment
 };
 
 
