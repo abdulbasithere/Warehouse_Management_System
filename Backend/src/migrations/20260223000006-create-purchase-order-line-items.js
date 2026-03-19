@@ -14,7 +14,7 @@ module.exports = {
                 allowNull: false
             },
             variantId: {
-                type: Sequelize.INTEGER,
+                type: Sequelize.STRING(50),
                 allowNull: false
             },
             color: {
