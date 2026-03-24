@@ -6,6 +6,10 @@ const ProductBarcode = sequelize.define('ProductBarcode', {
         type: DataTypes.STRING(50),
         allowNull: false
     },
+    ProductID: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     Barcode: {
         type: DataTypes.STRING(80),
         allowNull: false
@@ -27,7 +31,7 @@ const ProductBarcode = sequelize.define('ProductBarcode', {
 
 ProductBarcode.associate = (models) => {
     ProductBarcode.belongsTo(models.ProductVariant, {
-        foreignKey: 'VariantID',
+        foreignKey: ['ProductID', 'VariantID'],
         onDelete: 'CASCADE'
     });
 };

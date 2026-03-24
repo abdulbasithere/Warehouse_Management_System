@@ -3,13 +3,15 @@
 module.exports = {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable('ProductVariants', {
-            variantId: {
-                type: Sequelize.STRING(50),
-                allowNull: false
-            },
-            productId: {
+            productID: { // Move this to the top
                 type: Sequelize.INTEGER,
-                allowNull: false
+                allowNull: false,
+                primaryKey: true
+            },
+            variantID: { // Move this second
+                type: Sequelize.STRING(50),
+                allowNull: false,
+                primaryKey: true
             },
             color: {
                 type: Sequelize.STRING(50),

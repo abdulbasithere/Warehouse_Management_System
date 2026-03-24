@@ -16,6 +16,18 @@ const PurchaseOrderLineItem = sequelize.define('PurchaseOrderLineItem', {
         type: DataTypes.STRING(50),
         allowNull: false
     },
+    ProductID: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    Color: {
+        type: DataTypes.STRING(50),
+        allowNull: true
+    },
+    Size: {
+        type: DataTypes.STRING(50),
+        allowNull: true
+    },
     Quantity: {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false
@@ -54,7 +66,7 @@ const PurchaseOrderLineItem = sequelize.define('PurchaseOrderLineItem', {
 
 PurchaseOrderLineItem.associate = (models) => {
     PurchaseOrderLineItem.belongsTo(models.PurchaseOrder, { foreignKey: 'PurchaseOrderID' });
-    PurchaseOrderLineItem.belongsTo(models.ProductVariant, { foreignKey: 'VariantID' });
+    PurchaseOrderLineItem.belongsTo(models.ProductVariant, { foreignKey: ['ProductID', 'VariantID'] });
     PurchaseOrderLineItem.belongsTo(models.UnitsOfMeasure, { foreignKey: 'UoMID' });
 };
 

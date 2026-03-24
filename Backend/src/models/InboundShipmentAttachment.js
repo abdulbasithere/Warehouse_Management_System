@@ -2,14 +2,8 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../utils/db');
 
 const InboundShipmentAttachment = sequelize.define('InboundShipmentAttachment', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false
-    },
-    inboundShipmentId: {
-        type: DataTypes.INTEGER,
+    shipmentNumber: {
+        type: DataTypes.STRING(100),
         allowNull: false
     },
     fileName: {
@@ -35,7 +29,7 @@ const InboundShipmentAttachment = sequelize.define('InboundShipmentAttachment', 
 });
 
 InboundShipmentAttachment.associate = (models) => {
-    InboundShipmentAttachment.belongsTo(models.InboundShipment, { foreignKey: 'inboundShipmentId' });
+    InboundShipmentAttachment.belongsTo(models.InboundShipment, { foreignKey: 'shipmentNumber' });
 };
 
 module.exports = InboundShipmentAttachment;

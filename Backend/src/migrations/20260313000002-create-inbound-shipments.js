@@ -3,23 +3,11 @@
 module.exports = {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable('InboundShipments', {
-            id: {
-                type: Sequelize.INTEGER,
-                primaryKey: true,
-                autoIncrement: true,
-                allowNull: false
-            },
             warehouseId: {
                 type: Sequelize.INTEGER,
-                allowNull: true
             },
             purchaseOrderId: {
                 type: Sequelize.STRING(100),
-                allowNull: true
-            },
-            token: {
-                type: Sequelize.STRING(100),
-                allowNull: true
             },
             invoiceQuantity: {
                 type: Sequelize.INTEGER,
@@ -27,7 +15,7 @@ module.exports = {
             },
             shipmentNumber: {
                 type: Sequelize.STRING(100),
-                allowNull: true
+                primaryKey: true
             },
             vehicleNumber: {
                 type: Sequelize.STRING(100),
@@ -88,14 +76,8 @@ module.exports = {
         });
 
         await queryInterface.createTable('InboundShipmentItems', {
-            id: {
-                type: Sequelize.INTEGER,
-                primaryKey: true,
-                autoIncrement: true,
-                allowNull: false
-            },
-            inboundShipmentId: {
-                type: Sequelize.INTEGER,
+            shipmentNumber: {
+                type: Sequelize.STRING(100),
                 allowNull: false
             },
             packageType: {
@@ -113,14 +95,8 @@ module.exports = {
         });
 
         await queryInterface.createTable('InboundShipmentAttachments', {
-            id: {
-                type: Sequelize.INTEGER,
-                primaryKey: true,
-                autoIncrement: true,
-                allowNull: false
-            },
-            inboundShipmentId: {
-                type: Sequelize.INTEGER,
+            shipmentNumber: {
+                type: Sequelize.STRING(100),
                 allowNull: false
             },
             fileName: {

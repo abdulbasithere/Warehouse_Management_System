@@ -12,6 +12,10 @@ const UnitsOfMeasure = sequelize.define('UnitsOfMeasure', {
         type: DataTypes.STRING(50),
         allowNull: false
     },
+    ProductID: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     UnitName: {
         type: DataTypes.STRING(50),
         allowNull: false
@@ -40,7 +44,7 @@ const UnitsOfMeasure = sequelize.define('UnitsOfMeasure', {
 });
 
 UnitsOfMeasure.associate = (models) => {
-    UnitsOfMeasure.belongsTo(models.ProductVariant, { foreignKey: 'VariantID' });
+    UnitsOfMeasure.belongsTo(models.ProductVariant, { foreignKey: ['ProductID', 'VariantID'] });
     UnitsOfMeasure.belongsTo(models.UnitsOfMeasure, { as: 'Parent', foreignKey: 'ParentUoMID' });
     UnitsOfMeasure.hasMany(models.UnitsOfMeasure, { as: 'Children', foreignKey: 'ParentUoMID' });
     UnitsOfMeasure.hasMany(models.PurchaseOrderLineItem, { foreignKey: 'UoMID' });
