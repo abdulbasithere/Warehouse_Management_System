@@ -17,6 +17,10 @@ module.exports = {
                 type: Sequelize.STRING(50),
                 allowNull: false
             },
+            productId: {
+                type: Sequelize.INTEGER,
+                allowNull: false
+            },
             color: {
                 type: Sequelize.STRING(50),
                 allowNull: true

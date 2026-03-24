@@ -9,6 +9,7 @@ const ProductVariant = sequelize.define('ProductVariant', {
     },
     ProductID: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
         allowNull: false
     },
     Color: {
@@ -54,10 +55,10 @@ const ProductVariant = sequelize.define('ProductVariant', {
 
 ProductVariant.associate = (models) => {
     ProductVariant.belongsTo(models.Product, { foreignKey: 'ProductID' });
-    ProductVariant.hasMany(models.InventoryLocation, { foreignKey: 'VariantID' });
-    ProductVariant.hasMany(models.UnitsOfMeasure, { foreignKey: 'VariantID' });
-    ProductVariant.hasMany(models.PurchaseOrderLineItem, { foreignKey: 'VariantID' });
-    ProductVariant.hasMany(models.ProductBarcode, { foreignKey: 'VariantID' });
+    ProductVariant.hasMany(models.InventoryLocation, { foreignKey: ['ProductID', 'VariantID'] });
+    ProductVariant.hasMany(models.UnitsOfMeasure, { foreignKey: ['ProductID', 'VariantID'] });
+    ProductVariant.hasMany(models.PurchaseOrderLineItem, { foreignKey: ['ProductID', 'VariantID'] });
+    ProductVariant.hasMany(models.ProductBarcode, { foreignKey: ['ProductID', 'VariantID'] });
     // → later: OrderItem, Putaway, etc. can point here instead of old ProductId
 };
 

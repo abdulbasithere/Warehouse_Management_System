@@ -2,14 +2,8 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../utils/db');
 
 const InboundShipmentItem = sequelize.define('InboundShipmentItem', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false
-    },
-    inboundShipmentId: {
-        type: DataTypes.INTEGER,
+    shipmentNumber: {
+        type: DataTypes.STRING(100),
         allowNull: false
     },
     packageType: {
@@ -30,7 +24,7 @@ const InboundShipmentItem = sequelize.define('InboundShipmentItem', {
 });
 
 InboundShipmentItem.associate = (models) => {
-    InboundShipmentItem.belongsTo(models.InboundShipment, { foreignKey: 'inboundShipmentId' });
+    InboundShipmentItem.belongsTo(models.InboundShipment, { foreignKey: 'shipmentNumber' });
     InboundShipmentItem.belongsTo(models.ShelfLocation, { foreignKey: 'locationId' });
 };
 

@@ -4,6 +4,10 @@ module.exports = {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable('ProductBarcodes', {
             variantId: {
+                type: Sequelize.STRING(50),
+                allowNull: false
+            },
+            productId: {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },

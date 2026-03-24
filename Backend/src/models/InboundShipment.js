@@ -2,23 +2,11 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../utils/db');
 
 const InboundShipment = sequelize.define('InboundShipment', {
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false
-    },
     warehouseId: {
         type: DataTypes.INTEGER,
-        allowNull: true
     },
     purchaseOrderId: {
         type: DataTypes.STRING(100),
-        allowNull: true
-    },
-    token: {
-        type: DataTypes.STRING(100),
-        allowNull: true
     },
     invoiceQuantity: {
         type: DataTypes.INTEGER,
@@ -26,7 +14,7 @@ const InboundShipment = sequelize.define('InboundShipment', {
     },
     shipmentNumber: {
         type: DataTypes.STRING(100),
-        allowNull: true
+        primaryKey: true
     },
     vehicleNumber: {
         type: DataTypes.STRING(100),

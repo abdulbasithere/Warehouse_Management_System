@@ -10,6 +10,10 @@ module.exports = {
                 allowNull: false
             },
             variantId: {
+                type: Sequelize.STRING(50),
+                allowNull: false
+            },
+            productId: {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },

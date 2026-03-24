@@ -14,14 +14,14 @@ module.exports = {
             onUpdate: 'CASCADE'
         });
 
-        // OrderItems → Products (productid → ProductId)
+        // OrderItems → Products (productID → productID)
         await queryInterface.addConstraint('OrderItems', {
-            fields: ['productId'],
+            fields: ['productID'],
             type: 'foreign key',
             name: 'fk_orderitems_products',
             references: {
                 table: 'Products',
-                field: 'productId'
+                field: 'productID'
             },
             onUpdate: 'CASCADE'
         });
@@ -66,12 +66,12 @@ module.exports = {
 
         // OrderAllocations → Products
         await queryInterface.addConstraint('OrderAllocations', {
-            fields: ['productId'],
+            fields: ['productID'],
             type: 'foreign key',
             name: 'fk_orderallocations_product',
             references: {
                 table: 'Products',
-                field: 'productId'
+                field: 'productID'
             },
             onDelete: 'NO ACTION',
             onUpdate: 'NO ACTION'
@@ -105,12 +105,12 @@ module.exports = {
 
         // Putaway → Products
         await queryInterface.addConstraint('Putaway', {
-            fields: ['productId'],
+            fields: ['productID'],
             type: 'foreign key',
             name: 'fk_putaway_product',
             references: {
                 table: 'Products',
-                field: 'productId'
+                field: 'productID'
             },
             onUpdate: 'CASCADE'
         });
@@ -130,25 +130,26 @@ module.exports = {
 
         // InventoryLocations → Products
         await queryInterface.addConstraint('InventoryLocations', {
-            fields: ['productId'],
+            fields: ['productID'],
             type: 'foreign key',
             name: 'fk_inventory_product',
             references: {
                 table: 'Products',
-                field: 'productId'
+                field: 'productID'
             },
             onUpdate: 'CASCADE'
         });
 
         // InventoryLocations → ProductVariants
         await queryInterface.addConstraint('InventoryLocations', {
-            fields: ['variantId'],
+            fields: ['productID', 'variantID'],
             type: 'foreign key',
             name: 'fk_inventory_variant',
             references: {
                 table: 'ProductVariants',
-                field: 'variantId'
+                fields: ['productID', 'variantID']
             },
+            onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
         });
 
@@ -179,12 +180,12 @@ module.exports = {
 
         // InventoryAdjustments → Products
         await queryInterface.addConstraint('InventoryAdjustments', {
-            fields: ['productId'],
+            fields: ['productID'],
             type: 'foreign key',
             name: 'fk_inventoryadjustments_product',
             references: {
                 table: 'Products',
-                field: 'productId'
+                field: 'productID'
             },
             onUpdate: 'CASCADE'
         });
@@ -215,24 +216,24 @@ module.exports = {
 
         // ProductVariants → Products
         await queryInterface.addConstraint('ProductVariants', {
-            fields: ['productId'],
+            fields: ['productID'],
             type: 'foreign key',
             name: 'fk_variants_product',
             references: {
                 table: 'Products',
-                field: 'productId'
+                field: 'productID'
             },
-            onUpdate: 'CASCADE'
+            onUpdate: 'NO ACTION'
         });
 
         // UnitsOfMeasure → ProductVariants
         await queryInterface.addConstraint('UnitsOfMeasure', {
-            fields: ['variantId'],
+            fields: ['productID', 'variantID'],
             type: 'foreign key',
             name: 'fk_uom_variant',
             references: {
                 table: 'ProductVariants',
-                field: 'variantId'
+                fields: ['productID', 'variantID']
             },
             onUpdate: 'CASCADE'
         });
@@ -289,12 +290,12 @@ module.exports = {
 
         // PurchaseOrderLineItems → ProductVariants
         await queryInterface.addConstraint('PurchaseOrderLineItems', {
-            fields: ['variantId'],
+            fields: ['productID', 'variantID'],
             type: 'foreign key',
             name: 'fk_poline_variant',
             references: {
                 table: 'ProductVariants',
-                field: 'variantId'
+                fields: ['productID', 'variantID']
             },
             onUpdate: 'CASCADE'
         });
@@ -311,10 +312,83 @@ module.exports = {
             onDelete: 'NO ACTION',
             onUpdate: 'NO ACTION'
         });
+
+        await queryInterface.addConstraint('ProductBarcodes', {
+            fields: ['productID', 'variantID'],
+            type: 'foreign key',
+            name: 'fk_barcodes_variant',
+            references: {
+                table: 'ProductVariants',
+                fields: ['productID', 'variantID']
+            },
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        });
+
+        // InboundShipments → Warehouses
+        await queryInterface.addConstraint('InboundShipments', {
+            fields: ['warehouseId'],
+            type: 'foreign key',
+            name: 'fk_inboundshipments_warehouse',
+            references: {
+                table: 'Warehouses',
+                field: 'warehouseId'
+            },
+            onUpdate: 'CASCADE'
+        });
+
+        // InboundShipments → PurchaseOrders
+        await queryInterface.addConstraint('InboundShipments', {
+            fields: ['purchaseOrderId'],
+            type: 'foreign key',
+            name: 'fk_inboundshipments_po',
+            references: {
+                table: 'PurchaseOrders',
+                field: 'purchaseOrderId'
+            },
+            onUpdate: 'NO ACTION'
+        });
+
+        // InboundShipmentItems → InboundShipments
+        await queryInterface.addConstraint('InboundShipmentItems', {
+            fields: ['shipmentNumber'],
+            type: 'foreign key',
+            name: 'fk_shipmentitems_shipment',
+            references: {
+                table: 'InboundShipments',
+                field: 'shipmentNumber'
+            },
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        });
+
+        // InboundShipmentItems → ShelfLocations
+        await queryInterface.addConstraint('InboundShipmentItems', {
+            fields: ['locationId'],
+            type: 'foreign key',
+            name: 'fk_shipmentitems_shelf',
+            references: {
+                table: 'ShelfLocations',
+                field: 'shelfId'
+            },
+            onUpdate: 'CASCADE'
+        });
+
+        // InboundShipmentAttachments → InboundShipments
+        await queryInterface.addConstraint('InboundShipmentAttachments', {
+            fields: ['shipmentNumber'],
+            type: 'foreign key',
+            name: 'fk_shipmentattachments_shipment',
+            references: {
+                table: 'InboundShipments',
+                field: 'shipmentNumber'
+            },
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+        });
     },
 
     async down(queryInterface) {
-        // Remove NEW constraints
         await queryInterface.removeConstraint('PurchaseOrderLineItems', 'fk_poline_uom');
         await queryInterface.removeConstraint('PurchaseOrderLineItems', 'fk_poline_variant');
         await queryInterface.removeConstraint('PurchaseOrderLineItems', 'fk_poline_po');
@@ -323,8 +397,7 @@ module.exports = {
         await queryInterface.removeConstraint('UnitsOfMeasure', 'fk_uom_parent');
         await queryInterface.removeConstraint('UnitsOfMeasure', 'fk_uom_variant');
         await queryInterface.removeConstraint('ProductVariants', 'fk_variants_product');
-
-        // Remove EXISTING constraints
+        await queryInterface.removeConstraint('ProductBarcodes', 'fk_barcodes_variant');
         await queryInterface.removeConstraint('InventoryAdjustments', 'fk_inventoryadjustments_product');
         await queryInterface.removeConstraint('InventoryAdjustments', 'fk_inventoryadjustments_shelf');
         await queryInterface.removeConstraint('InventoryAdjustments', 'fk_inventoryadjustments_user');
@@ -343,5 +416,11 @@ module.exports = {
         await queryInterface.removeConstraint('PickList', 'fk_picklist_user');
         await queryInterface.removeConstraint('OrderItems', 'fk_orderitems_products');
         await queryInterface.removeConstraint('OrderItems', 'fk_orderitems_orders');
+
+        await queryInterface.removeConstraint('InboundShipmentAttachments', 'fk_shipmentattachments_shipment');
+        await queryInterface.removeConstraint('InboundShipmentItems', 'fk_shipmentitems_shelf');
+        await queryInterface.removeConstraint('InboundShipmentItems', 'fk_shipmentitems_shipment');
+        await queryInterface.removeConstraint('InboundShipments', 'fk_inboundshipments_po');
+        await queryInterface.removeConstraint('InboundShipments', 'fk_inboundshipments_warehouse');
     }
 };

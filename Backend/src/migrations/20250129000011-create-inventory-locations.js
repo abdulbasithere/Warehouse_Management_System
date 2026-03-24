@@ -1,4 +1,3 @@
-// migrations/20250129000011-create-inventory-locations.js
 'use strict';
 
 module.exports = {
@@ -10,8 +9,12 @@ module.exports = {
                 autoIncrement: true,
                 allowNull: false
             },
-            productId: {
+            productID: {
                 type: Sequelize.INTEGER,
+                allowNull: false
+            },
+            variantID: {
+                type: Sequelize.STRING(50),
                 allowNull: false
             },
             shelfId: {
@@ -48,17 +51,16 @@ module.exports = {
             }
         });
 
-        // Add unique constraint on the business key
         await queryInterface.addConstraint('InventoryLocations', {
-            fields: ['productId', 'shelfId', 'putawayId'],
+            fields: ['productID', 'variantID', 'shelfId', 'putawayId'],
             type: 'unique',
-            name: 'unique_product_shelf_putaway'
+            name: 'unique_product_variant_shelf_putaway'
         });
     },
 
     async down(queryInterface, Sequelize) {
-        await queryInterface.removeConstraint('InventoryLocations', 'unique_product_shelf_putaway');
-
+        // Drop constraints first, then the table
+        await queryInterface.removeConstraint('InventoryLocations', 'unique_product_variant_shelf_putaway');
         await queryInterface.dropTable('InventoryLocations');
     }
 };

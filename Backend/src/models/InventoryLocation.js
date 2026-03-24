@@ -12,7 +12,7 @@ const InventoryLocation = sequelize.define('InventoryLocation', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    VariantId: {
+    VariantID: {
         type: DataTypes.STRING(50),
         allowNull: false
     },
@@ -45,7 +45,7 @@ const InventoryLocation = sequelize.define('InventoryLocation', {
 
 InventoryLocation.associate = (models) => {
     InventoryLocation.belongsTo(models.Product, { foreignKey: 'ProductID' });
-    InventoryLocation.belongsTo(models.ProductVariant, { foreignKey: 'VariantID' });
+    InventoryLocation.belongsTo(models.ProductVariant, { foreignKey: ['ProductID', 'VariantID'] });
     InventoryLocation.belongsTo(models.ShelfLocation, { foreignKey: 'ShelfID' });
     InventoryLocation.belongsTo(models.Putaway, { foreignKey: 'PutawayId' });
 };
