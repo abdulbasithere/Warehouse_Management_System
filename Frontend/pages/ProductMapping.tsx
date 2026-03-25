@@ -204,7 +204,7 @@ const columns: Column<VariantRow>[] = [
 
         <div className="flex items-center gap-2">
           <Button
-            variant="secondary"
+            variant="primary"
             size="sm"
             onClick={addRow}
             className="h-7 px-3 text-[9px] font-black uppercase tracking-widest"
