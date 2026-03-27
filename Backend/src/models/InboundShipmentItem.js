@@ -17,6 +17,10 @@ const InboundShipmentItem = sequelize.define('InboundShipmentItem', {
     locationId: {
         type: DataTypes.STRING(100),
         allowNull: true
+    },
+    itemNumber: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 }, {
     tableName: 'InboundShipmentItems',

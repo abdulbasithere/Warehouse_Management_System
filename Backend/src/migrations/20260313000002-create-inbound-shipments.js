@@ -68,6 +68,11 @@ module.exports = {
                 allowNull: false,
                 defaultValue: 'pending'
             },
+            isQualityCheck: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false,
+                defaultValue: false
+            },
             createdAt: {
                 type: Sequelize.DATE,
                 allowNull: false,
@@ -91,6 +96,10 @@ module.exports = {
             locationId: {
                 type: Sequelize.STRING(100),
                 allowNull: true
+            },
+            itemNumber: {
+                type: Sequelize.INTEGER,
+                allowNull: false
             }
         });
 

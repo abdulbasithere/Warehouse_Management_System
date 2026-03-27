@@ -54,6 +54,11 @@ const InboundShipment = sequelize.define('InboundShipment', {
         allowNull: false,
         defaultValue: false
     },
+    isQualityCheck: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
     remark: {
         type: DataTypes.TEXT,
         allowNull: true

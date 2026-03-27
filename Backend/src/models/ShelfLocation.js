@@ -28,6 +28,10 @@ const ShelfLocation = sequelize.define('ShelfLocation', {
     Basket: {
         type: DataTypes.STRING(50),
         allowNull: true
+    },
+    WarehouseId: {
+        type: DataTypes.INTEGER,
+        allowNull: true
     }
 }, {
     tableName: 'ShelfLocations',
@@ -36,6 +40,7 @@ const ShelfLocation = sequelize.define('ShelfLocation', {
 
 ShelfLocation.associate = (models) => {
     ShelfLocation.hasMany(models.InventoryLocation, { foreignKey: 'ShelfID' });
+    ShelfLocation.belongsTo(models.Warehouse, { foreignKey: 'WarehouseId' });
 };
 
 module.exports = ShelfLocation;
