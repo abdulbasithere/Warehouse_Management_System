@@ -20,7 +20,7 @@ import { ReturnsPage } from './pages/ReturnsPage';
 import { UserManagementPage } from './pages/UserManagementPage';
 import { InventoryAdjustmentPage } from './pages/InventoryAdjustmentPage';
 import ProductMapping from './pages/ProductMapping';
-import {PurchaseOrderPage} from './pages/PurchaseOrderPage';
+import { PurchaseOrderPage } from './pages/PurchaseOrderPage';
 import PurchaseOrderDetailPage from './pages/PurchaseOrderDetailPage';
 import GetInPage from './pages/GetInPage';
 import WarehousePage from './pages/WarehousePage';
@@ -96,10 +96,8 @@ const App: React.FC = () => {
           <Route path="Product-mapping" element={<RoleGuard allowedRoles={['MASTER']}><ProductMapping /></RoleGuard>} />
           <Route path="inventory-adjustment" element={<RoleGuard allowedRoles={['MASTER']}><InventoryAdjustmentPage /></RoleGuard>} />
           <Route path="GetIn" element={<RoleGuard allowedRoles={['MASTER']}><GetInPage /></RoleGuard>} />
-          <Route path="warehouse" element={<RoleGuard allowedRoles={['MASTER']}><WarehousePage /></RoleGuard>} />
-          <Route path="warehouse/:id" element={<WarehouseFormPage />}/>
           <Route path="users" element={<RoleGuard allowedRoles={['MASTER']}><UserManagementPage /></RoleGuard>} />
-          
+
           {/* Picking & Putaway */}
           <Route path="picking" element={<RoleGuard allowedRoles={['MASTER', 'PICKER']}><PickingOverviewPage /></RoleGuard>} />
           <Route path="picking/:pickListId" element={<RoleGuard allowedRoles={['MASTER', 'PICKER']}><PickingDetailPage /></RoleGuard>} />

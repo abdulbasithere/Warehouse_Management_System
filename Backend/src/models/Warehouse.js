@@ -34,6 +34,7 @@ const Warehouse = sequelize.define('Warehouse', {
 Warehouse.associate = (models) => {
     Warehouse.hasMany(models.InventoryLocation, { foreignKey: 'WarehouseID' });
     Warehouse.hasMany(models.PurchaseOrder, { foreignKey: 'ReceivingWarehouseID' });
+    Warehouse.hasMany(models.ShelfLocation, { foreignKey: 'WarehouseId' });
 };
 
 module.exports = Warehouse;

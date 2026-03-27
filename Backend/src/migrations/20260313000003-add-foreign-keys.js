@@ -386,6 +386,19 @@ module.exports = {
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
         });
+
+        // ShelfLocations → Warehouses
+        await queryInterface.addConstraint('ShelfLocations', {
+            fields: ['warehouseId'],
+            type: 'foreign key',
+            name: 'fk_shelflocations_warehouse',
+            references: {
+                table: 'Warehouses',
+                field: 'warehouseId'
+            },
+            onUpdate: 'NO ACTION',
+            onDelete: 'NO ACTION'
+        });
     },
 
     async down(queryInterface) {
@@ -422,5 +435,6 @@ module.exports = {
         await queryInterface.removeConstraint('InboundShipmentItems', 'fk_shipmentitems_shipment');
         await queryInterface.removeConstraint('InboundShipments', 'fk_inboundshipments_po');
         await queryInterface.removeConstraint('InboundShipments', 'fk_inboundshipments_warehouse');
+        await queryInterface.removeConstraint('ShelfLocations', 'fk_shelflocations_warehouse');
     }
 };

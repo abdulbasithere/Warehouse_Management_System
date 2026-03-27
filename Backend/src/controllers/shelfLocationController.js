@@ -5,13 +5,17 @@ const { Op } = require('sequelize');
 
 const getShelfLocations = async (req, res, next) => {
     try {
-        const { search = '', page = 1, pageSize = 5 } = req.query;
+        const { search = '', warehouseId, page = 1, pageSize = 5 } = req.query;
         const offset = (page - 1) * pageSize;
 
         const where = {};
 
         if (search) {
             where.ShelfId = { [Op.like]: `%${search}%` };
+        }
+
+        if (warehouseId) {
+            where.WarehouseId = warehouseId;
         }
 
         const { count, rows } = await ShelfLocation.findAndCountAll({
@@ -27,6 +31,7 @@ const getShelfLocations = async (req, res, next) => {
             shelfLevel: sl.ShelfLevel,
             basket: sl.Basket,
             currentOccupancy: sl.CurrentOccupancy || 0,
+            warehouseId: sl.WarehouseId
         }));
 
         res.json({ data: mappedLocations, total: count });
@@ -37,7 +42,7 @@ const getShelfLocations = async (req, res, next) => {
 
 const createShelfLocation = async (req, res, next) => {
     try {
-        const { aisle, shelfLevel, basket } = req.body;
+        const { aisle, shelfLevel, basket, warehouseId } = req.body;
         const shelfId = `${aisle}-${shelfLevel}-${basket}`;
 
         const newLocation = await ShelfLocation.create({
@@ -45,6 +50,7 @@ const createShelfLocation = async (req, res, next) => {
             Aisle: aisle,
             ShelfLevel: shelfLevel,
             Basket: basket,
+            WarehouseId: warehouseId
         });
 
         res.status(201).json({
@@ -54,6 +60,7 @@ const createShelfLocation = async (req, res, next) => {
             shelfLevel: newLocation.ShelfLevel,
             basket: newLocation.Basket,
             currentOccupancy: newLocation.CurrentOccupancy || 0,
+            warehouseId: newLocation.WarehouseId
         });
     } catch (error) {
         next(error);
@@ -72,6 +79,7 @@ const bulkCreateShelfLocations = async (req, res, next) => {
             const aisle = (row.Aisle || row.aisle || '').toString().trim();
             const shelfLevel = (row.ShelfLevel || row.shelfLevel || row.Level || row.level || '').toString().trim();
             const basket = (row.Basket || row.basket || '').toString().trim();
+            const warehouseId = row.WarehouseId || row.warehouseId || row.WarehouseID || row.warehouse_id;
 
             if (!aisle || !shelfLevel || !basket) return null;
 
@@ -80,6 +88,7 @@ const bulkCreateShelfLocations = async (req, res, next) => {
                 Aisle: aisle,
                 ShelfLevel: shelfLevel,
                 Basket: basket,
+                WarehouseId: warehouseId
             };
         }).filter(l => l !== null);
 
