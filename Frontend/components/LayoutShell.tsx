@@ -37,6 +37,7 @@ export const LayoutShell: React.FC = () => {
           <SidebarLink to="/Purchase-Order" onClick={onItemClick}>Purchase Order</SidebarLink>
           <SidebarLink to="/Product-mapping" onClick={onItemClick}>Product Mapping</SidebarLink>
           <SidebarLink to="/GetIn" onClick={onItemClick}>Inbound Shipment</SidebarLink>
+          <SidebarLink to="/warehouse" onClick={onItemClick}>Warehouse</SidebarLink>
           <SidebarLink to="/users" onClick={onItemClick}>Users</SidebarLink>
         </>
       )}
