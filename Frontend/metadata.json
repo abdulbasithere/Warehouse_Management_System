@@ -1,0 +1,5 @@
+{
+  "name": "Warehouse Management System",
+  "description": "Enterprise-grade warehouse management system frontend demo for inventory, picking, packing, and putaway operations.",
+  "requestFramePermissions": []
+}

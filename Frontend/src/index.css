@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter', 'Circular', 'customFont', 'customFont Fallback', Helvetica Neue, Helvetica, Arial, sans-serif;
+  --font-mono: 'Source Code Pro', 'Office Code Pro', Menlo, monospace;
+
+  --color-supabase-green: #3ecf8e;
+  --color-supabase-bg: #1c1c1c;
+  --color-supabase-sidebar: #171717;
+  --color-supabase-border: #2e2e2e;
+}
+
+@layer base {
+  body {
+    @apply font-sans antialiased bg-neutral-50 text-neutral-900 dark:bg-[#1c1c1c] dark:text-neutral-100;
+  }
+
+  button, 
+  [role="button"], 
+  [role="tab"], 
+  input[type="submit"], 
+  input[type="reset"], 
+  input[type="button"],
+  a {
+    cursor: pointer;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #d4d4d8;
+    border-radius: 10px;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background-color: #525252;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #a1a1aa;
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background-color: #737373;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #d4d4d8 transparent;
+  }
+  .dark * {
+    scrollbar-color: #525252 transparent;
+  }
+}
+
+/* React Toastify Custom Styles */
+:root {
+  --toastify-color-light: #ffffff;
+  --toastify-color-dark: #1c1c1c;
+  --toastify-color-info: #3b82f6;
+  --toastify-color-success: #3ecf8e;
+  --toastify-color-warning: #f59e0b;
+  --toastify-color-error: #ef4444;
+  --toastify-text-color-light: #171717;
+  --toastify-text-color-dark: #f5f5f5;
+}
+
+.Toastify__toast {
+  @apply rounded-md border border-neutral-100 dark:border-neutral-800 shadow-md font-sans text-sm;
+  background: var(--toastify-color-light);
+  color: var(--toastify-text-color-light);
+}
+
+.dark .Toastify__toast {
+  background: var(--toastify-color-dark);
+  color: var(--toastify-text-color-dark);
+}
+
+.Toastify__toast--success {
+  @apply border-supabase-green/20;
+}
+
+.Toastify__toast--error {
+  @apply border-red-500/20;
+}
+
+.Toastify__toast-body {
+  @apply px-3 py-2;
+}
+
+.Toastify__close-button {
+  @apply opacity-50 hover:opacity-100 transition-opacity;
+}
+
+.Toastify__progress-bar {
+  @apply h-1; /* Thicker slightly to closely match toastify default */
+}
+
+@media only screen and (max-width: 480px) {
+  .Toastify__toast-container {
+    padding: 0.5rem !important; /* give standard margin to separate from viewport edges */
+  }
+  .Toastify__toast {
+    border-radius: 0.375rem !important; /* rounded-md */
+    margin-bottom: 0.5rem !important;
+  }
+}
+
+@keyframes scan-line {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(180px); }
+}
+
+@keyframes highlight-blink {
+  0% { background-color: rgba(62, 207, 142, 0.3); }
+  100% { background-color: transparent; }
+}
+
+.animate-scan {
+  animation: scan-line 2.5s ease-in-out infinite;
+}
+
+.animate-highlight {
+  animation: highlight-blink 1.5s ease-out forwards;
+}
